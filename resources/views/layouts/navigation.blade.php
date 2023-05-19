@@ -23,6 +23,18 @@
                         {{ __('Item Group') }}
                     </x-nav-link>
                 </div>
+                {{-- item --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('item.index')" :active="request()->routeIs('Item ')">
+                        {{ __('Item ') }}
+                    </x-nav-link>
+                </div>
+                {{-- 'expenditure.index' --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('expenditure.index')" :active="request()->routeIs('Expenditure ')">
+                        {{ __('Expenditure ') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

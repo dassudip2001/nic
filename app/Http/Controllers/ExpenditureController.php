@@ -11,7 +11,7 @@ class ExpenditureController extends Controller
      */
     public function index()
     {
-        //
+        return view('expenditure.index');
     }
 
     /**

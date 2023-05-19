@@ -83,8 +83,5 @@ class ItemGroupController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-        $item = ItemGroup::where('id', $id)->delete();
-        return redirect('itemGroup.create');
     }
 }
