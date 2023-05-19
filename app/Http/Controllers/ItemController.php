@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -11,15 +13,27 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('item.index');
+        $im = Item::all();
+        return view('item.index', compact('im'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $im = new Item();
+        $im->itemName = $request['itemName'];
+        $im->itemCode = $request['itemCode'];
+        $im->itemDescription = $request['itemDescription'];
+        $im->itemGroupId = $request['itemGroup'];
+        $im->user_id = auth()->user()->id;
+        try {
+            $im->save();
+            //code...
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -36,6 +50,8 @@ class ItemController extends Controller
     public function show(string $id)
     {
         //
+        $im = Item::find($id);
+        return view('item.edit', compact('im'));
     }
 
     /**
@@ -43,7 +59,6 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -51,7 +66,20 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $im = Item::find($id);
+        $im = new Item();
+        $im->itemName = $request['itemName'];
+        $im->itemCode = $request['itemCode'];
+        $im->itemDescription = $request['itemDescription'];
+        $im->itemGroupId = $request['itemGroup'];
+        $im->user_id = auth()->user()->id;
+        try {
+            $im->save();
+            return redirect()->route('item.index');
+            //code...
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -60,5 +88,7 @@ class ItemController extends Controller
     public function destroy(string $id)
     {
         //
+        Item::find($id)->delete();
+        return redirect()->route('item.index');
     }
 }
