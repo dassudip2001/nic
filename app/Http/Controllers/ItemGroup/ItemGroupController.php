@@ -83,5 +83,8 @@ class ItemGroupController extends Controller
      */
     public function destroy(string $id)
     {
+
+        ItemGroup::find($id)->delete();
+        return redirect()->route('itemGroup.index');
     }
 }
