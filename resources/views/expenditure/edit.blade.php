@@ -48,7 +48,8 @@
                                 <select name="item_id" class="form-select" aria-label="Default select example">
                                     <option selected>Open this select menu</option>
                                     @foreach ($itemEx as $ig)
-                                        <option value="{{ $ig->id }}">{{ $ig->itemName }}
+                                        <option value="{{ $ig->id }}"
+                                            {{ $ig->id == $ex->item_id ? 'selected' : '' }}> {{ $ig->itemName }}
                                         </option>
                                     @endforeach
                                 </select>
