@@ -55,10 +55,10 @@ class ItemController extends Controller
     {
         //
         $im = Item::find($id);
-        return DB::table('items')
+        $imgroup = DB::table('items')
             ->join('item_groups', 'item_groups.id', '=', 'items.itemGroupId')
             ->get();
-        return view('item.edit', compact('im'));
+        return view('item.edit', compact('im', 'imgroup'));
     }
 
     /**
@@ -78,7 +78,7 @@ class ItemController extends Controller
         $im->itemName = $request['itemName'];
         $im->itemCode = $request['itemCode'];
         $im->itemDescription = $request['itemDescription'];
-        $im->itemGroupId = $request['itemGroup'];
+        $im->itemGroupId = $request['itemGroupId'];
         $im->user_id = auth()->user()->id;
         try {
             $im->save();

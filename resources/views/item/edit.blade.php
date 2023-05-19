@@ -36,10 +36,10 @@
                                 </label>
                                 <select name="itemGroupId" class="form-select" aria-label="Default select example">
                                     <option selected>Open this select menu</option>
-                                    {{-- @foreach ($imGroup as $ig)
+                                    @foreach ($imgroup as $ig)
                                         <option value="{{ $ig->id }}">{{ $ig->itemGroupName }}
                                         </option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
