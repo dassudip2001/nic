@@ -113,9 +113,12 @@
                                                 <td>{{ $itm->expenditure_type }}</td>
                                                 <td>{{ $itm->expenditure_amount }}</td>
                                                 <td>
-                                                    <a href="{{ url('/expenditure/edit', $itm->id) }}">Edit</a>
-
-                                                    <a href="{{ url('/expenditure/delete', $itm->id) }}">Delete</a>
+                                                    @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
+                                                        <a href="{{ url('/expenditure/edit', $itm->id) }}">Edit</a>
+                                                    @endif
+                                                    @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
+                                                        <a href="{{ url('/expenditure/delete', $itm->id) }}">Delete</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

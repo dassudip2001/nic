@@ -67,7 +67,7 @@
                                     <th scope="col">More</th>
                                 </tr>
                             </thead>
-                            <tbody class="over-flow:auto">
+                            <tbody class="overflow-auto">
                                 @foreach ($item as $itm)
                                     <tr>
                                         <th scope="row">{{ $itm->id }}</th>
@@ -75,9 +75,12 @@
                                         <td>{{ $itm->itemGroupDescription }}</td>
 
                                         <td>
-                                            <a href="{{ url('/item-group/edit', $itm->id) }}">Edit</a>
-
-                                            <a href="{{ url('/item-group/delete', $itm->id) }}">Delete</a>
+                                            @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
+                                                <a href="{{ url('/item-group/edit', $itm->id) }}">Edit</a>
+                                            @endif
+                                            @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
+                                                <a href="{{ url('/item-group/delete', $itm->id) }}">Delete</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

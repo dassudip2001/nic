@@ -87,8 +87,8 @@
                                     <th scope="col">Item Name</th>
                                     <th scope="col">Item Code</th>
                                     <th scope="col">Item Describption</th>
-
                                     <th scope="col">More</th>
+
                                 </tr>
                             </thead>
                             <tbody class="">
@@ -99,10 +99,13 @@
                                         <td>{{ $itm->itemCode }}</td>
                                         <td>{{ $itm->itemDescription }}</td>
                                         <td>
+                                            @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
+                                                <a href="{{ url('/item/edit', $itm->id) }}">Edit</a>
+                                            @endif
 
-                                            <a href="{{ url('/item/edit', $itm->id) }}">Edit</a>
-
-                                            <a href="{{ url('/item/delete', $itm->id) }}">Delete</a>
+                                            @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
+                                                <a href="{{ url('/item/delete', $itm->id) }}">Delete</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
