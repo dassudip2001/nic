@@ -76,10 +76,12 @@
 
                                         <td>
                                             @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
-                                                <a href="{{ url('/item-group/edit', $itm->id) }}">Edit</a>
+                                                <a href="{{ url('/item-group/edit', $itm->id) }}"><i
+                                                        class="fa-regular fa-pen-to-square"></i></a>
                                             @endif
                                             @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
-                                                <a href="{{ url('/item-group/delete', $itm->id) }}">Delete</a>
+                                                <a href="{{ url('/item-group/delete', $itm->id) }}"><i
+                                                        class="fa-sharp fa-solid fa-trash"></i></a>
                                             @endif
                                         </td>
                                     </tr>

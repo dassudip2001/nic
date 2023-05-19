@@ -114,10 +114,12 @@
                                                 <td>{{ $itm->expenditure_amount }}</td>
                                                 <td>
                                                     @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
-                                                        <a href="{{ url('/expenditure/edit', $itm->id) }}">Edit</a>
+                                                        <a href="{{ url('/expenditure/edit', $itm->id) }}"><i
+                                                                class="fa-regular fa-pen-to-square"></i></a>
                                                     @endif
                                                     @if (Auth::user()->id === $itm->user_id || Auth::user()->id == '1')
-                                                        <a href="{{ url('/expenditure/delete', $itm->id) }}">Delete</a>
+                                                        <a href="{{ url('/expenditure/delete', $itm->id) }}"><i
+                                                                class="fa-sharp fa-solid fa-trash"></i></a>
                                                     @endif
                                                 </td>
                                             </tr>
