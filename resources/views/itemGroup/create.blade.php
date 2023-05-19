@@ -75,9 +75,9 @@
                                         <td>{{ $itm->itemGroupDescription }}</td>
 
                                         <td>
-                                            <a href="">Edit</a>
+                                            <a href="{{ url('/item-group/edit', $itm->id) }}">Edit</a>
 
-                                            <a href="">Delete</a>
+                                            <a href="{{ url('/item-group/delete', $itm->id) }}">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

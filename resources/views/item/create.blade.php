@@ -79,8 +79,8 @@
                         Item Group
                         <hr>
                     </div>
-                    <div class="card-body overflow-auto">
-                        <table class="table table-primary overflow-auto">
+                    <div class="card-body ">
+                        <table class="table table-primary ">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -91,7 +91,7 @@
                                     <th scope="col">More</th>
                                 </tr>
                             </thead>
-                            <tbody class="overflow-auto">
+                            <tbody class="">
                                 @foreach ($im as $itm)
                                     <tr>
                                         <th scope="row">{{ $itm->id }}</th>
@@ -99,6 +99,7 @@
                                         <td>{{ $itm->itemCode }}</td>
                                         <td>{{ $itm->itemDescription }}</td>
                                         <td>
+
                                             <a href="">Edit</a>
 
                                             <a href="">Delete</a>

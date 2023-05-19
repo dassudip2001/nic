@@ -74,6 +74,7 @@ class ItemGroupController extends Controller
         try {
             //code...
             $item->save();
+            return  redirect()->route('item-group.index');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -86,6 +87,6 @@ class ItemGroupController extends Controller
     {
 
         ItemGroup::find($id)->delete();
-        return redirect()->route('itemGroup.index');
+        return redirect()->route('item-group.index');
     }
 }

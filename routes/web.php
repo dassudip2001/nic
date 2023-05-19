@@ -32,9 +32,9 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/item-group', [ItemGroupController::class, 'index'])->name('item-group.index');
 Route::post('/item-group', [ItemGroupController::class, 'create'])->name('item-group.create');
-Route::get('/item-group/{id}', [ItemGroupController::class, 'show'])->name('item-group.show');
-Route::put('/item-group/{id}', [ItemGroupController::class, 'update'])->name('item-group.update');
-Route::get('/item-group/{id}', [ItemGroupController::class, 'destroy'])->name('item-group.destroy');
+Route::get('/item-group/edit/{id}', [ItemGroupController::class, 'show'])->name('item-group.show');
+Route::put('/item-group/edit/{id}', [ItemGroupController::class, 'update'])->name('item-group.update');
+Route::get('/item-group/delete/{id}', [ItemGroupController::class, 'destroy'])->name('item-group.destroy');
 
 
 // Item 
