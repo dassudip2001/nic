@@ -56,7 +56,10 @@ class ExpenditureController extends Controller
     public function show(string $id)
     {
         $ex = Expenditure::find($id);
-        return view('expenditure.edit', compact('ex'));
+        $itemEx = DB::table('expenditures')
+            ->join('items', 'items.id', '=', 'expenditures.item_id')
+            ->get();
+        return view('expenditure.edit', compact('ex', 'itemEx'));
     }
 
     /**

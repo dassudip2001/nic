@@ -15,26 +15,30 @@
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
+                        @method('PUT')
                         @csrf
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="expenditure_name" class="form-label">Expenditure Name
                                 </label>
-                                <input type="text" class="form-control" name="expenditure_name" id="expenditure_name"
+                                <input type="text" class="form-control" value="{{ $ex->expenditure_name }}"
+                                    name="expenditure_name" id="expenditure_name"
                                     placeholder="Enter The Expenditure Name">
                             </div>
                             <div class="mb-3">
                                 <label for="expenditure_type" class="form-label">Expenditure type
                                 </label>
-                                <input type="text" class="form-control" name="expenditure_type" id="expenditure_type"
+                                <input type="text" class="form-control" value="{{ $ex->expenditure_type }}"
+                                    name="expenditure_type" id="expenditure_type"
                                     placeholder="Enter The Expenditure Type">
                             </div>
                             <div class="mb-3">
                                 <label for="expenditure_amount" class="form-label">Expenditure
                                     Amount
                                 </label>
-                                <input type="text" class="form-control" name="expenditure_amount"
-                                    id="expenditure_amount" placeholder="Enter The Expenditure Amount">
+                                <input type="text" class="form-control" value="{{ $ex->expenditure_amount }}"
+                                    name="expenditure_amount" id="expenditure_amount"
+                                    placeholder="Enter The Expenditure Amount">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Item
@@ -43,10 +47,10 @@
                                 </label>
                                 <select name="item_id" class="form-select" aria-label="Default select example">
                                     <option selected>Open this select menu</option>
-                                    {{-- @foreach ($imgroup as $ig)
+                                    @foreach ($itemEx as $ig)
                                         <option value="{{ $ig->id }}">{{ $ig->itemName }}
                                         </option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
