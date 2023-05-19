@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\ItemGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +14,9 @@ class ItemController extends Controller
      */
     public function index()
     {
+        $imGroup = ItemGroup::all();
         $im = Item::all();
-        return view('item.index', compact('im'));
+        return view('item.create', compact('im', 'imGroup'));
     }
 
     /**
@@ -26,10 +28,11 @@ class ItemController extends Controller
         $im->itemName = $request['itemName'];
         $im->itemCode = $request['itemCode'];
         $im->itemDescription = $request['itemDescription'];
-        $im->itemGroupId = $request['itemGroup'];
+        $im->itemGroupId = $request['itemGroupId'];
         $im->user_id = auth()->user()->id;
         try {
             $im->save();
+            return redirect()->route('item.create');
             //code...
         } catch (\Throwable $th) {
             throw $th;

@@ -29,6 +29,7 @@ class ItemGroupController extends Controller
         $item->user_id = auth()->user()->id;
         try {
             $item->save();
+            return redirect()->route('item-group.create');
             //code...
         } catch (\Throwable $th) {
             throw $th;

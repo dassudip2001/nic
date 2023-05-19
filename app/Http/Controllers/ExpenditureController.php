@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expenditure;
+use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExpenditureController extends Controller
 {
@@ -12,8 +14,11 @@ class ExpenditureController extends Controller
      */
     public function index()
     {
+        $ab = DB::table('expenditures')
+            ->get();
+        $imex = Item::all();
         $ex = Expenditure::all();
-        return view('expenditure.index', compact('ex'));
+        return view('expenditure.create', compact('ex', 'imex'));
     }
 
     /**
