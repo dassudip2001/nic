@@ -53,12 +53,22 @@ class ItemController extends Controller
      */
     public function show(string $id)
     {
+        $user = Auth::user();
+        // $ex = Expenditure::findOrFail($id);
+
+
+        $ex = Item::find($id);
+        if ($user->id === $ex->user_id || Auth::user()->id == '1') {
+
+            $im = Item::find($id);
+            $imgroup = DB::table('items')
+                ->join('item_groups', 'item_groups.id', '=', 'items.itemGroupId')
+                ->get();
+            return view('item.edit', compact('im', 'imgroup'));
+        } else {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
         //
-        $im = Item::find($id);
-        $imgroup = DB::table('items')
-            ->join('item_groups', 'item_groups.id', '=', 'items.itemGroupId')
-            ->get();
-        return view('item.edit', compact('im', 'imgroup'));
     }
 
     /**
@@ -73,19 +83,29 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $im = Item::find($id);
-        $im = new Item();
-        $im->itemName = $request['itemName'];
-        $im->itemCode = $request['itemCode'];
-        $im->itemDescription = $request['itemDescription'];
-        $im->itemGroupId = $request['itemGroupId'];
-        $im->user_id = auth()->user()->id;
-        try {
-            $im->save();
-            return redirect()->route('item.index');
-            //code...
-        } catch (\Throwable $th) {
-            throw $th;
+        $user = Auth::user();
+        // $ex = Expenditure::findOrFail($id);
+
+
+        $ex = Item::find($id);
+        if ($user->id === $ex->user_id || Auth::user()->id == '1') {
+
+            $im = Item::find($id);
+            $im = new Item();
+            $im->itemName = $request['itemName'];
+            $im->itemCode = $request['itemCode'];
+            $im->itemDescription = $request['itemDescription'];
+            $im->itemGroupId = $request['itemGroupId'];
+            $im->user_id = auth()->user()->id;
+            try {
+                $im->save();
+                return redirect()->route('item.index');
+                //code...
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        } else {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
     }
 
@@ -94,8 +114,18 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
+        $user = Auth::user();
+        // $ex = Expenditure::findOrFail($id);
+
+
+        $ex = Item::find($id);
+        if ($user->id === $ex->user_id || Auth::user()->id == '1') {
+
+            Item::find($id)->delete();
+            return redirect()->route('item.index');
+        } else {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
         //
-        Item::find($id)->delete();
-        return redirect()->route('item.index');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ItemGroup;
 use App\Http\Controllers\Controller;
 use App\Models\ItemGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemGroupController extends Controller
 {
@@ -49,8 +50,18 @@ class ItemGroupController extends Controller
      */
     public function show(string $id)
     {
-        $item = ItemGroup::find($id);
-        return view('itemGroup.edit', compact('item'));
+        $user = Auth::user();
+        // $ex = Expenditure::findOrFail($id);
+
+
+        $ex = ItemGroup::find($id);
+        if ($user->id === $ex->user_id || Auth::user()->id == '1') {
+
+            $item = ItemGroup::find($id);
+            return view('itemGroup.edit', compact('item'));
+        } else {
+            return response()->json("you cannot view");
+        }
     }
 
     /**
@@ -66,17 +77,27 @@ class ItemGroupController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $item = ItemGroup::find($id);
-        $item->itemGroupName = $request['itemGroupName'];
-        $item->itemGroupDescription = $request['itemGroupDescription'];
-        $item->user_id = auth()->user()->id;
+        $user = Auth::user();
+        // $ex = Expenditure::findOrFail($id);
 
-        try {
-            //code...
-            $item->save();
-            return  redirect()->route('item-group.index');
-        } catch (\Throwable $th) {
-            throw $th;
+
+        $ex = ItemGroup::find($id);
+        if ($user->id === $ex->user_id || Auth::user()->id == '1') {
+
+            $item = ItemGroup::find($id);
+            $item->itemGroupName = $request['itemGroupName'];
+            $item->itemGroupDescription = $request['itemGroupDescription'];
+            $item->user_id = auth()->user()->id;
+
+            try {
+                //code...
+                $item->save();
+                return  redirect()->route('item-group.index');
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        } else {
+            return response()->json("you cannot edit");
         }
     }
 
@@ -85,8 +106,17 @@ class ItemGroupController extends Controller
      */
     public function destroy(string $id)
     {
+        $user = Auth::user();
+        // $ex = Expenditure::findOrFail($id);
 
-        ItemGroup::find($id)->delete();
-        return redirect()->route('item-group.index');
+
+        $ex = ItemGroup::find($id);
+        if ($user->id === $ex->user_id || Auth::user()->id == '1') {
+
+            ItemGroup::find($id)->delete();
+            return redirect()->route('item-group.index');
+        } else {
+            return response()->json("you cannot delete");
+        }
     }
 }
