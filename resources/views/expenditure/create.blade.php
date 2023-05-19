@@ -113,9 +113,9 @@
                                                 <td>{{ $itm->expenditure_type }}</td>
                                                 <td>{{ $itm->expenditure_amount }}</td>
                                                 <td>
-                                                    <a href="">Edit</a>
+                                                    <a href="{{ url('/expenditure/edit', $itm->id) }}">Edit</a>
 
-                                                    <a href="">Delete</a>
+                                                    <a href="{{ url('/expenditure/delete', $itm->id) }}">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach

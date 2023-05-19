@@ -41,17 +41,17 @@ Route::get('/item-group/delete/{id}', [ItemGroupController::class, 'destroy'])->
 
 Route::get('/item', [ItemController::class, 'index'])->name('item.index');
 Route::post('/item', [ItemController::class, 'create'])->name('item.create');
-Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
-Route::Put('/item/{id}', [ItemController::class, 'update'])->name('item.update');
-Route::get('/item/{id}', [ItemController::class, 'destroy'])->name('item.destroy');
+Route::get('/item/edit/{id}', [ItemController::class, 'show'])->name('item.show');
+Route::Put('/item/edit/{id}', [ItemController::class, 'update'])->name('item.update');
+Route::get('/item/delete/{id}', [ItemController::class, 'destroy'])->name('item.destroy');
 
 
 // expenditure
 
 Route::get('/expenditure', [ExpenditureController::class, 'index'])->name('expenditure.index');
 Route::post('/expenditure', [ExpenditureController::class, 'create'])->name('expenditure.create');
-Route::get('/expenditure/{id}', [ExpenditureController::class, 'show'])->name('expenditure.show');
-Route::Put('/expenditure/{id}', [ExpenditureController::class, 'update'])->name('expenditure.update');
-Route::get('/expenditure/{id}', [ExpenditureController::class, 'destroy'])->name('expenditure.destroy');
+Route::get('/expenditure/edit/{id}', [ExpenditureController::class, 'show'])->name('expenditure.show');
+Route::Put('/expenditure/edit/{id}', [ExpenditureController::class, 'update'])->name('expenditure.update');
+Route::get('/expenditure/delete/{id}', [ExpenditureController::class, 'destroy'])->name('expenditure.destroy');
 
 require __DIR__ . '/auth.php';

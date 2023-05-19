@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create Item Page') }}
+            {{ __('Show Item Page') }}
         </h2>
     </x-slot>
 
@@ -100,9 +100,9 @@
                                         <td>{{ $itm->itemDescription }}</td>
                                         <td>
 
-                                            <a href="">Edit</a>
+                                            <a href="{{ url('/item/edit', $itm->id) }}">Edit</a>
 
-                                            <a href="">Delete</a>
+                                            <a href="{{ url('/item/delete', $itm->id) }}">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

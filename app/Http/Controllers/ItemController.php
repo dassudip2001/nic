@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\ItemGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -54,6 +55,9 @@ class ItemController extends Controller
     {
         //
         $im = Item::find($id);
+        return DB::table('items')
+            ->join('item_groups', 'item_groups.id', '=', 'items.itemGroupId')
+            ->get();
         return view('item.edit', compact('im'));
     }
 
