@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ItemGroup;
 
 use App\Http\Controllers\Controller;
+use App\Models\ItemGroup;
 use Illuminate\Http\Request;
 
 class ItemGroupController extends Controller
@@ -12,15 +13,26 @@ class ItemGroupController extends Controller
      */
     public function index()
     {
-        return view('itemGroup.index');
+        $item = ItemGroup::all();
+        return view('itemGroup.create', compact('item'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
+        $item = new ItemGroup();
+        $item->itemGroupName = $request['itemGroupName'];
+        $item->itemGroupDescription = $request['itemGroupDescription'];
+        $item->user_id = auth()->user()->id;
+        try {
+            $item->save();
+            //code...
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -36,7 +48,8 @@ class ItemGroupController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $item = ItemGroup::find($id);
+        return view('itemGroup.edit', compact('item'));
     }
 
     /**
@@ -52,7 +65,17 @@ class ItemGroupController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $item = ItemGroup::find($id);
+        $item->itemGroupName = $request['itemGroupName'];
+        $item->itemGroupDescription = $request['itemGroupDescription'];
+        $item->user_id = auth()->user()->id;
+
+        try {
+            //code...
+            $item->save();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -61,5 +84,7 @@ class ItemGroupController extends Controller
     public function destroy(string $id)
     {
         //
+        $item = ItemGroup::where('id', $id)->delete();
+        return redirect('itemGroup.create');
     }
 }

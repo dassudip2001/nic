@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('item_groups', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('itemGroupName', 128)->unique()->index();
-            $table->string('itemGroupDescription', 256)->nullable();
+            $table->string('itemName');
+            $table->string('itemCode');
+            $table->string('itemDescription');
+            $table->unsignedBigInteger('itemGroupId');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_groups');
+        Schema::dropIfExists('items');
     }
 };

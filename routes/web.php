@@ -29,5 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/item-group', [ItemGroupController::class, 'index'])->name('item-group.index');
+Route::post('/item-group', [ItemGroupController::class, 'create'])->name('item-group.create');
+Route::get('/item-group', [ItemGroupController::class, 'show'])->name('item-group.show');
+Route::put('/item-group', [ItemGroupController::class, 'update'])->name('item-group.update');
+Route::get('/item-group', [ItemGroupController::class, 'destroy'])->name('item-group.destroy');
+
+
 
 require __DIR__ . '/auth.php';
